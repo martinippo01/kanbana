@@ -129,6 +129,40 @@ export default function projectView() {
         setDoneList([{title: data.title, assignee: data.assignee}, ...doneList]);
     }
 
+    const handleDeleteTask = (id, list) => {
+        if (list == "todo") {
+            setTodoList(() => {
+                let arr = []
+                for (let i = 0; i < todoList.length; i++) {
+                    if (i != id) {
+                        arr.push(todoList[i]);
+                    }
+                }
+                return arr;
+            });
+        } else if (list == "progress") {
+            setInProgressList(() => {
+                let arr = []
+                for (let i = 0; i < inProgressList.length; i++) {
+                    if (i != id) {
+                        arr.push(todoList[i]);
+                    }
+                }
+                return arr;
+            });
+        } else if (list == "done") {
+            setDoneList(() => {
+                let arr = []
+                for (let i = 0; i < doneList.length; i++) {
+                    if (i != id) {
+                        arr.push(todoList[i]);
+                    }
+                }
+                return arr;
+            });
+        }
+    }
+
     return (
         <>
             <Head>
@@ -151,7 +185,7 @@ export default function projectView() {
                                     <Card.Body>
                                         {todoList.map((object, i) =>
                                             <Draggable key={i} type="todo" data={`{"index": ${i}, "title": "${object.title}", "assignee": "${object.assignee}"}`}>
-                                                <TaskCard title={object.title} assignee={object.assignee}></TaskCard>
+                                                <TaskCard title={object.title} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "todo")}></TaskCard>
                                             </Draggable>
                                         )}
                                         <div className="d-grid gap-2">
@@ -168,7 +202,7 @@ export default function projectView() {
                                     <Card.Body>
                                         {inProgressList.map((object, i) =>
                                             <Draggable key={i} type="progress" data={`{"index": ${i}, "title": "${object.title}", "assignee": "${object.assignee}"}`}>
-                                                <TaskCard title={object.title} assignee={object.assignee}></TaskCard>
+                                                <TaskCard title={object.title} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "progress")}></TaskCard>
                                             </Draggable>
                                         )}
                                     </Card.Body>
@@ -182,7 +216,7 @@ export default function projectView() {
                                     <Card.Body>
                                         {doneList.map((object, i) =>
                                             <Draggable key={i} type="done" data={`{"index": ${i}, "title": "${object.title}", "assignee": "${object.assignee}"}`}>
-                                                <TaskCard title={object.title} assignee={object.assignee}></TaskCard>
+                                                <TaskCard title={object.title} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "done")}></TaskCard>
                                             </Draggable>
                                         )}
                                     </Card.Body>
