@@ -2,10 +2,13 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 import openai
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # openai.organization = "org-Hz3NVSoiYXLROi1jFcp14Gzg"
-openai.api_key = "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"
-
+openai.api_key = os.getenv("CHATGPT_KEY")
 
 app = FastAPI()
 
