@@ -7,8 +7,8 @@ import { Draggable, Droppable } from 'react-drag-and-drop';
 import { useState } from 'react';
 
 export default function projectView() {
-    const [todoList, setTodoList] = useState([{title: "1", assignee: "Alejo"}, {title: "2", assignee: "Alejo"}]);
-    const [inProgressList, setInProgressList] = useState([{title: "3", assignee: "Alejo"}]);
+    const [todoList, setTodoList] = useState([]);
+    const [inProgressList, setInProgressList] = useState([]);
     const [doneList, setDoneList] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newTaskDescription, setNewTaskDescription] = useState("");
