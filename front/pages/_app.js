@@ -1,7 +1,5 @@
-// // add bootstrap css
-// import 'bootstrap/dist/css/bootstrap.css'
-// // own css files here
-// import "../css/customcss.css";
+// add bootstrap css
+import 'bootstrap/dist/css/bootstrap.css'
 
 import '<kanbana-front>/styles/globals.css'
 
