@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import Form from 'react-bootstrap/Form';
 import styles from '<kanbana-front>/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,6 +16,23 @@ export default function CreateProject() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
+
+                <Form.Label htmlFor="inputPassword5">Pregunta 1: </Form.Label>
+                <Form.Control id="inputPassword5" aria-describedby="passwordHelpBlock"/>
+
+                <Form.Label htmlFor="inputPassword5">Pregunta 2: </Form.Label>
+                <Form.Control id="inputPassword5" aria-describedby="passwordHelpBlock"/>
+
+                <Form.Label htmlFor="inputPassword5">Pregunta 3: </Form.Label>
+                <Form.Control id="inputPassword5" aria-describedby="passwordHelpBlock"/>
+
+
+                <Form.Label htmlFor="inputPassword5">Pregunta 4: </Form.Label>
+                <Form.Control id="inputPassword5" aria-describedby="passwordHelpBlock"/>
+
+                <Form.Label htmlFor="inputPassword5">Pregunta 4: </Form.Label>
+                <Form.Control id="inputPassword5" aria-describedby="passwordHelpBlock"/>
+
 
             </main>
         </>
