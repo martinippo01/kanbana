@@ -17,6 +17,7 @@ function Person(props) {
 }
 
 
+
 function AddPeople() {
     const [show, setShow] = useState(false);
 

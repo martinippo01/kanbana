@@ -1,11 +1,15 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '<kanbana-front>/styles/Home.module.css'
+import styles from '<kanbana-front>/styles/Home.module.css';
+import Router from "next/router";
+import FormForProject from '../component/form';
+import { Container, Row, Col } from 'react-bootstrap';
+import AddPeople from '../component/addPeople';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function CreateProject() {
+
     return (
         <>
             <Head>
@@ -15,6 +19,19 @@ export default function CreateProject() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
+                <Container>
+                    <Row>
+                        <Col sm={8}>
+                            <FormForProject></FormForProject>
+                        </Col>
+                        <Col sm={4}>
+                            <AddPeople>
+
+                            </AddPeople>
+                        </Col>
+                    </Row>
+                </Container>
+
 
             </main>
         </>
