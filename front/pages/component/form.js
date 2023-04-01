@@ -12,8 +12,6 @@ function FormForProject() {
     const [question5, setQuestion5] = useState("");
 
 
-    const handleSumit = (event) =>
-
     return (
         <Container fluid>
             <Form fluid>
