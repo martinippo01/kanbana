@@ -1,19 +1,34 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
 import styles from '<kanbana-front>/styles/Home.module.css'
 import TaskCard from '<kanbana-front>/pages/component/taskCard'
 import NavBar from "<kanbana-front>/pages/component/navBar";
 import { Draggable, Droppable } from 'react-drag-and-drop';
 import { useState } from 'react';
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function projectView() {
     const [todoList, setTodoList] = useState([{title: "1", assignee: "Alejo"}, {title: "2", assignee: "Alejo"}]);
     const [inProgressList, setInProgressList] = useState([{title: "3", assignee: "Alejo"}]);
     const [doneList, setDoneList] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [newTaskDescription, setNewTaskDescription] = useState("");
+    const [newTaskAssignee, setNewTaskAssignee] = useState("");
+
+    const resetNewTaskForm = () => {
+        setNewTaskDescription('');
+        setNewTaskAssignee('');
+    }
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        resetNewTaskForm();
+    }
+    const handleShowModal = () => setShowModal(true);
+
+    const handleAddTask = () => {
+        setTodoList([{title: newTaskDescription, assignee: newTaskAssignee}, ...todoList]);
+        handleCloseModal();
+    }
 
     const handleTodoDrop = (data, event) => {
         let origin = '';
@@ -140,7 +155,7 @@ export default function projectView() {
                                             </Draggable>
                                         )}
                                         <div className="d-grid gap-2">
-                                            <Button variant="secondary">+</Button>
+                                            <Button variant="secondary" onClick={handleShowModal}>+</Button>
                                         </div>
                                     </Card.Body>
                                 </Card>
@@ -176,6 +191,28 @@ export default function projectView() {
                         </Col>
                     </Row>
                 </Container>
+                <Modal show={showModal} onHide={handleCloseModal} centered>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Add Task</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Task Description:</Form.Label>
+                                <Form.Control type="text" placeholder="Write something" value={newTaskDescription} onChange={(event) => setNewTaskDescription(event.target.value)}/>
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Assignee:</Form.Label>
+                                <Form.Control type="text" placeholder="Write someone's name" value={newTaskAssignee} onChange={(event) => setNewTaskAssignee(event.target.value)}/>
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="primary" onClick={handleAddTask}>
+                        Save
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
             </main>
         </>
     )
