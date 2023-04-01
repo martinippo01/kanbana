@@ -3,7 +3,7 @@ import {useState} from "react";
 
 function Person(props) {
     return(
-        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", width: "300px"}}>
             <a style={{margin: "15px", marginTop: "5px", marginBottom: "5px"}}>{props.name}</a>
             <div style={{marginLeft: "15px", margin: "5px"}} onClick={() => console.log("delete")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
