@@ -4,10 +4,19 @@ import { Inter } from 'next/font/google'
 import styles from '<kanbana-front>/styles/Home.module.css'
 import ProjectCard from "<kanbana-front>/pages/component/projectCard";
 import NavBar from "<kanbana-front>/pages/component/navBar";
+import {useEffect, useState} from "react";
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Projects() {
+
+    // const [token, setToken] = useState(null);
+    // useEffect(() => {
+    //     const data  = window.localStorage.getItem('token');
+    //     if(data != null)
+    //         setToken(data);
+    // }, []);
+
     return (
         <>
             <Head>
@@ -19,7 +28,7 @@ export default function Projects() {
             <NavBar></NavBar>
             <main className={styles.projects}>
                 <ProjectCard title="Certus development"></ProjectCard>
-                <ProjectCard title="Wovon Telegram"></ProjectCard>
+                <ProjectCard title={token}></ProjectCard>
             </main>
         </>
     )
