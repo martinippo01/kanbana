@@ -9,13 +9,13 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-    const [token, setToken] = useState('1234');
-    useEffect(() => {
-        const data  = window.localStorage.getItem('token');
-        if(data != null)
-            setToken(data);
-    }, []);
-    useEffect(() => window.localStorage.setItem('token', token), [token]);
+    // const [token, setToken] = useState('1234');
+    // useEffect(() => {
+    //     const data  = window.localStorage.getItem('token');
+    //     if(data != null)
+    //         setToken(data);
+    // }, []);
+    // useEffect(() => window.localStorage.setItem('token', token), [token]);
 
 
   return (
