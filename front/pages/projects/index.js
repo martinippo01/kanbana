@@ -27,8 +27,7 @@ export default function Projects() {
             </Head>
             <NavBar></NavBar>
             <main className={styles.projects}>
-                <ProjectCard title="Certus development"></ProjectCard>
-                <ProjectCard title={token}></ProjectCard>
+
             </main>
         </>
     )
