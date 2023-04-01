@@ -3,10 +3,21 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '<kanbana-front>/styles/Home.module.css'
 import NavBar from "<kanbana-front>/pages/component/navBar";
+import {useEffect, useState} from "react";
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+    const [token, setToken] = useState('1234');
+    useEffect(() => {
+        const data  = window.localStorage.getItem('token');
+        if(data != null)
+            setToken(data);
+    }, []);
+    useEffect(() => window.localStorage.setItem('token', token), [token]);
+
+
   return (
     <>
       <Head>
