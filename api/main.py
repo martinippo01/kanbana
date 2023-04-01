@@ -4,7 +4,7 @@ from typing import List
 import openai
 
 # openai.organization = "org-Hz3NVSoiYXLROi1jFcp14Gzg"
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 app = FastAPI()
@@ -56,4 +56,7 @@ def ask_chatgpt(prompt: str) -> str:
 @app.post("/")
 async def create_project(project: Project):
     prompt = get_prompt(project)
-    return ask_chatgpt(prompt)
+    return {
+        "name": project.name,
+        "tasks": ask_chatgpt(prompt),
+    }
