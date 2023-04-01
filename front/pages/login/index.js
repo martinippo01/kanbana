@@ -15,7 +15,7 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-
+                
             </main>
         </>
     )

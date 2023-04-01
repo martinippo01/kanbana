@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import styles from '<kanbana-front>/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,7 +16,52 @@ export default function projectView() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-
+                <Container>
+                    <Row>
+                        <Col>
+                            <Card>
+                                <Card.Header className='pt-3'><h4>To-Do</h4></Card.Header>
+                                <Card.Body>
+                                    <Card className='mb-3'>
+                                        <Card.Body>
+                                            <Card.Title>Lorem ipsum dolor sit arnetLorem ipsum dolor sit arnetLorem ipsum dolor sit arnetLorem ipsum dolor sit arnet</Card.Title>
+                                        </Card.Body>
+                                        <Card.Footer className="text-muted">@Alejo Flores Lucey</Card.Footer>
+                                    </Card>
+                                    <Card className='mb-3'>
+                                        <Card.Body>
+                                            <Card.Title>Lorem ipsum dolor sit arnetLorem ipsum dolor sit arnetLorem ipsum dolor sit arnetLorem ipsum dolor sit arnet</Card.Title>
+                                        </Card.Body>
+                                        <Card.Footer className="text-muted">@Alejo Flores Lucey</Card.Footer>
+                                    </Card>
+                                    <Card className='mb-3'>
+                                        <Card.Body>
+                                            <Card.Title>Lorem ipsum dolor sit arnetLorem ipsum dolor sit arnetLorem ipsum dolor sit arnetLorem ipsum dolor sit arnet</Card.Title>
+                                        </Card.Body>
+                                        <Card.Footer className="text-muted">@Alejo Flores Lucey</Card.Footer>
+                                    </Card>
+                                    <div className="d-grid gap-2">
+                                        <Button variant="secondary">+</Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <Card.Header className='pt-3'><h4>In Progress</h4></Card.Header>
+                                <Card.Body>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <Card.Header className='pt-3'><h4>Done</h4></Card.Header>
+                                <Card.Body>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
             </main>
         </>
     )
