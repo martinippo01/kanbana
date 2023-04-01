@@ -1,16 +1,29 @@
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, FloatingLabel } from 'react-bootstrap';
 
 
+
 function FormForProject() {
+    const [question1, setQuestion1] = useState("");
+    const [question2, setQuestion2] = useState("");
+    const [question3, setQuestion3] = useState("");
+    const [question4, setQuestion4] = useState("");
+    const [question5, setQuestion5] = useState("");
+
+
+    const handleSumit = (event) =>
+
     return (
         <Container fluid>
             <Form fluid>
                 <Row className='add-space'>
                     <Form.Group as={Col} controlId="question1">
                         <Form.Label>1. What is the goal or purpose of the software project?</Form.Label>
-                        <Form.Control as="textarea" placeholder="Answer" style={{ height: '100px' }}/>
+                        <Form.Control as="textarea" placeholder="Answer" style={{ height: '100px' }}
+                            value={question1}
+                            onChange={({ target }) => setQuestion1(target?.value)}
+                        />
                     </Form.Group>
                 </Row>
                 <Row className='add-space'>
