@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '<kanbana-front>/styles/Home.module.css'
+import NavBar from "<kanbana-front>/pages/component/navBar";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,31 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{backgroundColor: "#ffffff"}}>
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">Navbar</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/register">Register</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/login">Log In</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled">Disabled</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        <NavBar></NavBar>
       <main className={styles.main}>
 
       </main>
