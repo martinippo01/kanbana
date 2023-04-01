@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import styles from '<kanbana-front>/styles/Home.module.css'
+import NavBar from "<kanbana-front>/pages/component/navBar";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function projectView() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <NavBar></NavBar>
             <main className={styles.main}>
                 <Container>
                     <Row>
