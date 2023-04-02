@@ -1,14 +1,69 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import styles from '<kanbana-front>/styles/Home.module.css';
-import Router from "next/router";
-import FormForProject from '../component/form';
-import { Container, Row, Col } from 'react-bootstrap';
-import AddPeople from '../component/addPeople';
-
-const inter = Inter({ subsets: ['latin'] })
+import { Container, Row, Col, Form, Button, ListGroup, Modal } from 'react-bootstrap';
+import Person from '<kanbana-front>/pages/component/person';
+import NavBar from "<kanbana-front>/pages/component/navBar";
+import { useState, useEffect } from 'react';
 
 export default function CreateProject() {
+    const [projectName, setProjectName] = useState("");
+    const [question1, setQuestion1] = useState("");
+    const [question2, setQuestion2] = useState("");
+    const [question3, setQuestion3] = useState("");
+    const [question4, setQuestion4] = useState("");
+    const [question5, setQuestion5] = useState("");
+    const [showAddPersonModal, setShowAddPersonModal] = useState(false);
+    const [people, setPeople] = useState([]);
+    const [newPersonName, setNewPersonName] = useState("");
+    const [newPersonSkills, setNewPersonSkills] = useState("");
+
+    const resetNewPersonForm = () => {
+        setNewPersonName('');
+        setNewPersonSkills('');
+    }
+
+    const handleCloseAddPersonModal = () => {
+        setShowAddPersonModal(false);
+        resetNewPersonForm();
+    }
+    const handleShowAddPersonModal = () => setShowAddPersonModal(true);
+
+    const handleAddPerson = () => {
+        setPeople([...people, {name: newPersonName, skills: newPersonSkills}]);
+        handleCloseAddPersonModal();
+    }
+
+    useEffect(() => {
+        localStorage.setItem("question1", JSON.stringify(question1));
+    }, [question1])
+    useEffect(() => {
+        localStorage.setItem("question2", JSON.stringify(question2));
+    }, [question2])
+    useEffect(() => {
+        localStorage.setItem("question3", JSON.stringify(question3));
+    }, [question3])
+    useEffect(() => {
+        localStorage.setItem("question4", JSON.stringify(question4));
+    }, [question4])
+    useEffect(() => {
+        localStorage.setItem("question5", JSON.stringify(question5));
+    }, [question5])
+
+    const handleDeletePerson = (index) => {
+        setPeople(() => {
+            let arr = []
+            for (let i = 0; i < people.length; i++) {
+                if (i != index) {
+                    arr.push(people[i]);
+                }
+            }
+            return arr;
+        });
+    }
+
+    const handleSubmitProject = () => {
+
+    }
 
     return (
         <>
@@ -18,21 +73,110 @@ export default function CreateProject() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <NavBar></NavBar>
             <main className={styles.main}>
                 <Container>
+                    <h1 className='mb-4'>Create project</h1>
                     <Row>
                         <Col sm={8}>
-                            <FormForProject></FormForProject>
+                            <h3>Project Information</h3>
+                            <Form fluid>
+                                <Row className='add-space'>
+                                    <Form.Group as={Col} controlId="question1">
+                                        <Form.Label>Project name</Form.Label>
+                                        <Form.Control type="text" placeholder="Name" value={projectName} onChange={e => setProjectName(e.target.value)}/>
+                                    </Form.Group>
+                                </Row>
+                                <Row className='add-space'>
+                                    <Form.Group as={Col} controlId="question1">
+                                        <Form.Label>What is the goal or purpose of the software project?</Form.Label>
+                                        <Form.Control as="textarea" placeholder="Answer" style={{ height: '100px' }}
+                                            value={question1} onChange={e => setQuestion1(e.target.value)}/>
+                                    </Form.Group>
+                                </Row>
+                                <Row className='add-space'>
+                                    <Form.Group as={Col} controlId="question2">
+                                        <Form.Label>What are the key features and functionalities that the software project should include?</Form.Label>
+                                        <Form.Control as="textarea" placeholder="Answer" style={{ height: '100px' }}
+                                            value={question2} onChange={e => setQuestion2(e.target.value)}/>
+                                    </Form.Group>
+                                </Row>
+                                <Row className='add-space'>
+                                    <Form.Group as={Col} controlId="question3">
+                                        <Form.Label>What is the target audience for the software project?</Form.Label>
+                                        <Form.Control as="textarea" placeholder="Answer" style={{ height: '100px' }}
+                                            value={question3} onChange={e => setQuestion3(e.target.value)}/>
+                                    </Form.Group>
+                                </Row>
+                                <Row className='add-space'>
+                                    <Form.Group as={Col} controlId="question4">
+                                        <Form.Label>What are the technical requirements for the software project, such as programming languages or databases?</Form.Label>
+                                        <Form.Control as="textarea" placeholder="Answer" style={{ height: '100px' }}
+                                            value={question4} onChange={e => setQuestion4(e.target.value)}/>
+                                    </Form.Group>
+                                </Row>
+                                <Row className='add-space'>
+                                    <Form.Group as={Col} controlId="question5">
+                                        <Form.Label>Is there any additional information that we should know?</Form.Label>
+                                        <Form.Control as="textarea" placeholder="Answer" style={{ height: '100px' }}
+                                            value={question5} onChange={e => setQuestion5(e.target.value)}/>
+                                    </Form.Group>
+                                </Row>
+
+                                <Row className='add-space'>
+                                    <div className="d-grid gap-2 mt-3">
+                                        <Button variant="primary" type="submit" onClick={handleSubmitProject} disabled={(projectName != "" && question1 != ""  && question2 != ""  && question3 != ""  && question4 != ""  && question5 != "" && people.length) > 0 ? false : true}>
+                                            Submit
+                                        </Button>
+                                    </div>
+                                </Row>
+                            </Form>
                         </Col>
                         <Col sm={4}>
-                            <AddPeople>
-
-                            </AddPeople>
+                            <h3>People working in the project</h3>
+                            <ListGroup>
+                                {people.map((object, i) =>
+                                    <ListGroup.Item key={i}>
+                                        <Person name={object.name} skills={object.skills} deletePerson={() => handleDeletePerson(i)}></Person>
+                                    </ListGroup.Item>
+                                )}
+                                <ListGroup.Item className='d-flex justify-content-center'>
+                                    <Button variant="outline-light" className="text-muted" onClick={handleShowAddPersonModal} style={{width: "100%"}}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                            className="bi bi-plus-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                        </svg>
+                                    </Button>
+                                </ListGroup.Item>
+                            </ListGroup>
                         </Col>
                     </Row>
                 </Container>
 
-
+                <Modal show={showAddPersonModal} onHide={handleCloseAddPersonModal} backdrop="static" centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title><a style={{color: "black"}}>Add a person to the project</a></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control placeholder="John Doe" value={newPersonName} onChange={(event) => setNewPersonName(event.target.value)}/>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Skill</Form.Label>
+                                <Form.Control placeholder="React Native, Front end, Graphic design, ..." value={newPersonSkills} onChange={(event) => setNewPersonSkills(event.target.value)}/>
+                                <Form.Text className="text-muted">
+                                    Enter the skills separated with ','
+                                </Form.Text>
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleAddPerson} disabled={(newPersonName != '' && newPersonSkills != "") ? false : true}>Save</Button>
+                    </Modal.Footer>
+                </Modal>
             </main>
         </>
     )
