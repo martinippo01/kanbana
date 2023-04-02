@@ -1,25 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '<kanbana-front>/styles/Home.module.css'
-import NavBar from "<kanbana-front>/pages/component/navBar";
-import {useEffect, useState} from "react";
 import svg from '../public/undraw_scrum_board_re_wk7v.svg'
 import {Button} from "react-bootstrap";
+import NavBar from './component/navBar';
+import Footer from './component/footer';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-
-    // const [token, setToken] = useState('1234');
-    // useEffect(() => {
-    //     const data  = window.localStorage.getItem('token');
-    //     if(data != null)
-    //         setToken(data);
-    // }, []);
-    // useEffect(() => window.localStorage.setItem('token', token), [token]);
-
-
   return (
       <>
           <Head>
@@ -34,21 +24,27 @@ export default function Home() {
                 backgroundColor: "#FFFFFF",
             }}
           >
-            <NavBar color="#d6dbdc"></NavBar>
-              <section id="hero" className="hero"
+
+            {/* <Navbar  bg="dark" variant="dark" className='d-flex justify-content-center'>
+                    <Navbar.Brand className="my-auto" href="#home">Kanbana</Navbar.Brand>
+            </Navbar> */}
+
+            <NavBar></NavBar>
+              {/* <section id="hero" className="hero"
                 style={{
                     width: "100%",
+                    height: "100%",
                     position: "relative",
                     background: "#d6dbdc",
                     paddingTop: "60px",
                     marginTop: 0,
                 }}
-              >
+              > */}
                   <div className="container position-relative">
                       <div className="row gy-5" data-aos="fade-in">
                           <div
                               className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-                              <h1>Introducing Kanabana</h1>
+                              <h1>Introducing Kanbana</h1>
                               <p>Our platform uses AI to automate task management for team projects, assigning tasks based on individual skills and knowledge. Boost productivity and efficiency with intelligent task allocation.</p>
                               <Button variant="outline-primary" style={{width: "300px"}} href="/createProject">Create your first project</Button>
                           </div>
@@ -57,39 +53,7 @@ export default function Home() {
                           </div>
                       </div>
                   </div>
-
-                  <div className="icon-boxes position-relative">
-                      <div className="container position-relative">
-                          <div className="row gy-4 mt-5">
-
-                              <div className="col-xl-4 col-md-4">
-                                  <div className="icon-box">
-                                      <div className="icon"><i className="bi bi-easel"></i></div>
-                                      <h4 className="title"><a href="" className="stretched-link">Efficient project management</a></h4>
-                                  </div>
-                              </div>
-
-
-                              <div className="col-xl-4 col-md-4">
-                                  <div className="icon-box">
-                                      <div className="icon"><i className="bi bi-gem"></i></div>
-                                      <h4 className="title"><a href="" className="stretched-link">Developer's Knowledge-driven</a></h4>
-                                  </div>
-                              </div>
-
-
-                              <div className="col-xl-4 col-md-4" >
-                                  <div className="icon-box">
-                                      <div className="icon"><i className="bi bi-geo-alt"></i></div>
-                                      <h4 className="title"><a href="" className="stretched-link">Skill-based delegation</a></h4>
-                                  </div>
-                              </div>
-
-
-                          </div>
-                      </div>
-                  </div>
-              </section>
+                <Footer></Footer>
           </div>
       </>
   );

@@ -283,3 +283,7 @@ a {
   border-left: 15px solid #0D6EFD;
   transform: scale(20);
 }
+
+.hola {
+  color: #808080;
+}
