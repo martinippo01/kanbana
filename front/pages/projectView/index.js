@@ -171,7 +171,7 @@ export default function projectView() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <NavBar></NavBar>
+            <NavBar color="#FFFFFF"></NavBar>
             <main className={styles.main}>
                 <Container>
                     <Row>
