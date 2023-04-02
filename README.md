@@ -3,8 +3,8 @@
 ## How to run
 
 ```Bash
-docker-compose build
-docker-compose up
+chmod u+x run.sh
+./run.sh
 ```
 
 ## How to stop
