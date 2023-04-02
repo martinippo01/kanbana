@@ -110,6 +110,10 @@ a {
   margin-bottom: 15px;
 }
 
+.container-landing {
+  height: calc(100vh - 56px - 37px);
+}
+
 .hero .icon-boxes {
   padding-bottom: 60px;
 }
