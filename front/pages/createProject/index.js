@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 export default function CreateProject() {
     const router = useRouter();
-
+    
     const [projectName, setProjectName] = useState("");
     const [question1, setQuestion1] = useState("");
     const [question2, setQuestion2] = useState("");
