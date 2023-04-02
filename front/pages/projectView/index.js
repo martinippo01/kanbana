@@ -57,7 +57,7 @@ export default function projectView() {
     const handleShowModal = () => setShowModal(true);
 
     const handleAddTask = () => {
-        let arr = [{title: newTaskDescription, assignee: newTaskAssignee}, ...todoList]
+        let arr = [{task: newTaskDescription, assignee: newTaskAssignee}, ...todoList]
         setTodoList(arr);
         localStorage.setItem("todoList", JSON.stringify(arr));
         handleCloseModal();
@@ -95,7 +95,7 @@ export default function projectView() {
                 return arr;
             });
         }
-        let arr = [{title: data.title, assignee: data.assignee}, ...todoList]
+        let arr = [{task: data.task, assignee: data.assignee}, ...todoList]
         setTodoList(arr);
         localStorage.setItem("todoList", JSON.stringify(arr));
     }
@@ -132,7 +132,7 @@ export default function projectView() {
                 return arr;
             });
         }
-        let arr = [{title: data.title, assignee: data.assignee}, ...inProgressList]
+        let arr = [{task: data.task, assignee: data.assignee}, ...inProgressList]
         setInProgressList(arr);
         localStorage.setItem("progressList", JSON.stringify(arr));
     }
@@ -169,7 +169,7 @@ export default function projectView() {
                 return arr;
             });
         }
-        let arr = [{title: data.title, assignee: data.assignee}, ...doneList]
+        let arr = [{task: data.task, assignee: data.assignee}, ...doneList]
         setDoneList(arr);
         localStorage.setItem("doneList", JSON.stringify(arr));
     }
@@ -232,8 +232,8 @@ export default function projectView() {
                                     <Card.Header className='pt-3'><h4>To-Do</h4></Card.Header>
                                     <Card.Body>
                                         {todoList.map((object, i) =>
-                                            <Draggable key={i} type="todo" data={`{"index": ${i}, "title": "${object.title}", "assignee": "${object.assignee}"}`}>
-                                                <TaskCard title={object.title} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "todo")}></TaskCard>
+                                            <Draggable key={i} type="todo" data={`{"index": ${i}, "task": "${object.task}", "assignee": "${object.assignee}"}`}>
+                                                <TaskCard title={object.task} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "todo")}></TaskCard>
                                             </Draggable>
                                         )}
                                         <div className="d-grid gap-2">
@@ -254,8 +254,8 @@ export default function projectView() {
                                     <Card.Header className='pt-3'><h4>In Progress</h4></Card.Header>
                                     <Card.Body>
                                         {inProgressList.map((object, i) =>
-                                            <Draggable key={i} type="progress" data={`{"index": ${i}, "title": "${object.title}", "assignee": "${object.assignee}"}`}>
-                                                <TaskCard title={object.title} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "progress")}></TaskCard>
+                                            <Draggable key={i} type="progress" data={`{"index": ${i}, "task": "${object.task}", "assignee": "${object.assignee}"}`}>
+                                                <TaskCard title={object.task} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "progress")}></TaskCard>
                                             </Draggable>
                                         )}
                                     </Card.Body>
@@ -268,8 +268,8 @@ export default function projectView() {
                                     <Card.Header className='pt-3'><h4>Done</h4></Card.Header>
                                     <Card.Body>
                                         {doneList.map((object, i) =>
-                                            <Draggable key={i} type="done" data={`{"index": ${i}, "title": "${object.title}", "assignee": "${object.assignee}"}`}>
-                                                <TaskCard title={object.title} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "done")}></TaskCard>
+                                            <Draggable key={i} type="done" data={`{"index": ${i}, "task": "${object.task}", "assignee": "${object.assignee}"}`}>
+                                                <TaskCard title={object.task} assignee={object.assignee} deleteTask={() => handleDeleteTask(i, "done")}></TaskCard>
                                             </Draggable>
                                         )}
                                     </Card.Body>
