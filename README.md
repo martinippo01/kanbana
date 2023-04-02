@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Kanbana es una plataforma que automatiza el procedimiento de creación de tareas para llevar a cabo un proyecto de software y su asignación a la persona que posea las aptitudes que se ajusten a los requerimientos de la misma, mediante el uso de inteligencia artificial.
+Kanbana es una plataforma que automatiza el procedimiento de creación de tareas para llevar a cabo un proyecto de software y su asignación a la persona que posea las aptitudes que se ajusten a los requerimientos de la misma, mediante el uso de inteligencia artificial. Puede ver un video explicativo del proyecto [aquí](https://youtu.be/yR7c0GzsxKc).
 
 ## Prerrequisitos
 
