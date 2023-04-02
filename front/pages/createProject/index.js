@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '<kanbana-front>/styles/Home.module.css';
-import { Container, Row, Col, Form, Button, ListGroup, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, ListGroup, Modal, Spinner } from 'react-bootstrap';
 import Person from '<kanbana-front>/pages/component/person';
 import NavBar from "<kanbana-front>/pages/component/navBar";
 import { useState, useEffect } from 'react';
@@ -19,6 +19,7 @@ export default function CreateProject() {
     const [people, setPeople] = useState([]);
     const [newPersonName, setNewPersonName] = useState("");
     const [newPersonSkills, setNewPersonSkills] = useState("");
+    const [showLoadingModal, setShowLoadingModal] = useState(false);
 
     const resetNewPersonForm = () => {
         setNewPersonName('');
@@ -49,15 +50,39 @@ export default function CreateProject() {
     }
 
     const handleSubmitProject = () => {
+        setShowLoadingModal(true);
+
         localStorage.removeItem("projectName");
         localStorage.removeItem("progressList");
         localStorage.removeItem("doneList");
 
-        // LLAMADA A API
+        let people_arr = [];
+        for (let person of people) {
+            people_arr.push({name: person.name, skills: person.skills.split(", ")});
+        }
 
-        localStorage.setItem("projectName", projectName);
-        localStorage.setItem("todoList", JSON.stringify([{title: "Ejemplo 1", assignee: "Ejemplo 1"}, {title: "Ejemplo 2", assignee: "Ejemplo 2"}]));
-        router.push('/projectView');
+        fetch("http://localhost:8000/", {
+            method: "POST",
+            body: JSON.stringify({
+                "people": people_arr,
+                "name": projectName,
+                "purpose": question1,
+                "features": question2,
+                "audience": question3,
+                "requirements": question4,
+                "comments": question5
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            localStorage.setItem("projectName", projectName);
+            localStorage.setItem("todoList", JSON.stringify(data.tasks));
+            router.push('/projectView');
+        })
+        .catch(e => console.log(e));
     }
 
     return (
@@ -171,6 +196,14 @@ export default function CreateProject() {
                     <Modal.Footer>
                         <Button variant="primary" onClick={handleAddPerson} disabled={(newPersonName != '' && newPersonSkills != "") ? false : true}>Save</Button>
                     </Modal.Footer>
+                </Modal>
+
+                <Modal show={showLoadingModal} centered>
+                    <Modal.Body className='d-flex align-items-center justify-content-center'>
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </Modal.Body>
                 </Modal>
             </main>
         </>
