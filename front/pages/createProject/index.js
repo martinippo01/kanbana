@@ -4,8 +4,11 @@ import { Container, Row, Col, Form, Button, ListGroup, Modal } from 'react-boots
 import Person from '<kanbana-front>/pages/component/person';
 import NavBar from "<kanbana-front>/pages/component/navBar";
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function CreateProject() {
+    const router = useRouter();
+    
     const [projectName, setProjectName] = useState("");
     const [question1, setQuestion1] = useState("");
     const [question2, setQuestion2] = useState("");
@@ -33,22 +36,6 @@ export default function CreateProject() {
         handleCloseAddPersonModal();
     }
 
-    useEffect(() => {
-        localStorage.setItem("question1", JSON.stringify(question1));
-    }, [question1])
-    useEffect(() => {
-        localStorage.setItem("question2", JSON.stringify(question2));
-    }, [question2])
-    useEffect(() => {
-        localStorage.setItem("question3", JSON.stringify(question3));
-    }, [question3])
-    useEffect(() => {
-        localStorage.setItem("question4", JSON.stringify(question4));
-    }, [question4])
-    useEffect(() => {
-        localStorage.setItem("question5", JSON.stringify(question5));
-    }, [question5])
-
     const handleDeletePerson = (index) => {
         setPeople(() => {
             let arr = []
@@ -62,7 +49,15 @@ export default function CreateProject() {
     }
 
     const handleSubmitProject = () => {
+        localStorage.removeItem("projectName");
+        localStorage.removeItem("progressList");
+        localStorage.removeItem("doneList");
 
+        // LLAMADA A API
+
+        localStorage.setItem("projectName", projectName);
+        localStorage.setItem("todoList", JSON.stringify([{title: "Ejemplo 1", assignee: "Ejemplo 1"}, {title: "Ejemplo 2", assignee: "Ejemplo 2"}]));
+        router.push('/projectView');
     }
 
     return (
@@ -80,7 +75,7 @@ export default function CreateProject() {
                     <Row>
                         <Col sm={8}>
                             <h3>Project Information</h3>
-                            <Form fluid>
+                            <Form>
                                 <Row className='add-space'>
                                     <Form.Group as={Col} controlId="question1">
                                         <Form.Label>Project name</Form.Label>
@@ -125,7 +120,7 @@ export default function CreateProject() {
 
                                 <Row className='add-space'>
                                     <div className="d-grid gap-2 mt-3">
-                                        <Button variant="primary" type="submit" onClick={handleSubmitProject} disabled={(projectName != "" && question1 != ""  && question2 != ""  && question3 != ""  && question4 != ""  && question5 != "" && people.length) > 0 ? false : true}>
+                                        <Button variant="primary" onClick={handleSubmitProject} disabled={(projectName != "" && question1 != ""  && question2 != ""  && question3 != ""  && question4 != ""  && question5 != "" && people.length) > 0 ? false : true}>
                                             Submit
                                         </Button>
                                     </div>

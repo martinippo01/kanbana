@@ -4,7 +4,7 @@ import styles from '<kanbana-front>/styles/Home.module.css'
 import TaskCard from '<kanbana-front>/pages/component/taskCard'
 import NavBar from "<kanbana-front>/pages/component/navBar";
 import { Draggable, Droppable } from 'react-drag-and-drop';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function projectView() {
     const [todoList, setTodoList] = useState([]);
@@ -13,6 +13,37 @@ export default function projectView() {
     const [showModal, setShowModal] = useState(false);
     const [newTaskDescription, setNewTaskDescription] = useState("");
     const [newTaskAssignee, setNewTaskAssignee] = useState("");
+    const [projectName, setProjectName] = useState("");
+
+    useEffect(() => {
+        const ls_projectName = localStorage.getItem("projectName");
+        if (ls_projectName) {
+            setProjectName(ls_projectName);
+        }
+
+        const ls_todoList = JSON.parse(localStorage.getItem("todoList"));
+        if (ls_todoList) {
+            setTodoList(ls_todoList);
+        }
+        const ls_progressList = JSON.parse(localStorage.getItem("progressList"));
+        if (ls_progressList) {
+            setInProgressList(ls_progressList);
+        }
+        const ls_doneList = JSON.parse(localStorage.getItem("doneList"));
+        if (ls_doneList) {
+            setDoneList(ls_doneList);
+        }
+    }, []);
+
+    // useEffect(() => {
+    //     localStorage.setItem("todoList", JSON.stringify(todoList));
+    // }, [todoList])
+    // useEffect(() => {
+    //     localStorage.setItem("progressList", JSON.stringify(inProgressList));
+    // }, [inProgressList])
+    // useEffect(() => {
+    //     localStorage.setItem("doneList", JSON.stringify(doneList));
+    // }, [doneList])
 
     const resetNewTaskForm = () => {
         setNewTaskDescription('');
@@ -26,7 +57,9 @@ export default function projectView() {
     const handleShowModal = () => setShowModal(true);
 
     const handleAddTask = () => {
-        setTodoList([{title: newTaskDescription, assignee: newTaskAssignee}, ...todoList]);
+        let arr = [{title: newTaskDescription, assignee: newTaskAssignee}, ...todoList]
+        setTodoList(arr);
+        localStorage.setItem("todoList", JSON.stringify(arr));
         handleCloseModal();
     }
 
@@ -47,6 +80,7 @@ export default function projectView() {
                         arr.push(inProgressList[i]);
                     }
                 }
+                localStorage.setItem("progressList", JSON.stringify(arr));
                 return arr;
             });
         } else if (origin == "done") {
@@ -57,10 +91,13 @@ export default function projectView() {
                         arr.push(doneList[i]);
                     }
                 }
+                localStorage.setItem("doneList", JSON.stringify(arr));
                 return arr;
             });
         }
-        setTodoList([{title: data.title, assignee: data.assignee}, ...todoList]);
+        let arr = [{title: data.title, assignee: data.assignee}, ...todoList]
+        setTodoList(arr);
+        localStorage.setItem("todoList", JSON.stringify(arr));
     }
 
     const handleInProgressDrop = (data, event) => {
@@ -80,6 +117,7 @@ export default function projectView() {
                         arr.push(todoList[i]);
                     }
                 }
+                localStorage.setItem("todoList", JSON.stringify(arr));
                 return arr;
             });
         } else if (origin == "done") {
@@ -90,10 +128,13 @@ export default function projectView() {
                         arr.push(doneList[i]);
                     }
                 }
+                localStorage.setItem("doneList", JSON.stringify(arr));
                 return arr;
             });
         }
-        setInProgressList([{title: data.title, assignee: data.assignee}, ...inProgressList]);
+        let arr = [{title: data.title, assignee: data.assignee}, ...inProgressList]
+        setInProgressList(arr);
+        localStorage.setItem("progressList", JSON.stringify(arr));
     }
 
     const handleDoneDrop = (data, event) => {
@@ -113,6 +154,7 @@ export default function projectView() {
                         arr.push(todoList[i]);
                     }
                 }
+                localStorage.setItem("todoList", JSON.stringify(arr));
                 return arr;
             });
         } else if (origin == "progress") {
@@ -123,10 +165,13 @@ export default function projectView() {
                         arr.push(inProgressList[i]);
                     }
                 }
+                localStorage.setItem("progressList", JSON.stringify(arr));
                 return arr;
             });
         }
-        setDoneList([{title: data.title, assignee: data.assignee}, ...doneList]);
+        let arr = [{title: data.title, assignee: data.assignee}, ...doneList]
+        setDoneList(arr);
+        localStorage.setItem("doneList", JSON.stringify(arr));
     }
 
     const handleDeleteTask = (id, list) => {
@@ -138,6 +183,7 @@ export default function projectView() {
                         arr.push(todoList[i]);
                     }
                 }
+                localStorage.setItem("todoList", JSON.stringify(arr));
                 return arr;
             });
         } else if (list == "progress") {
@@ -148,6 +194,7 @@ export default function projectView() {
                         arr.push(todoList[i]);
                     }
                 }
+                localStorage.setItem("progressList", JSON.stringify(arr));
                 return arr;
             });
         } else if (list == "done") {
@@ -158,6 +205,7 @@ export default function projectView() {
                         arr.push(todoList[i]);
                     }
                 }
+                localStorage.setItem("doneList", JSON.stringify(arr));
                 return arr;
             });
         }
@@ -175,7 +223,7 @@ export default function projectView() {
             <main className={styles.main}>
                 <Container>
                     <Row>
-                        <h1>Project Name</h1>
+                        <h1>{projectName}</h1>
                     </Row>
                     <Row>
                         <Col>
