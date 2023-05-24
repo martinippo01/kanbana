@@ -6,7 +6,7 @@ import NavBar from "<kanbana-front>/pages/component/navBar";
 import { Draggable, Droppable } from 'react-drag-and-drop';
 import { useState, useEffect } from 'react';
 
-export default function projectView() {
+export default function ProjectView() {
     const [todoList, setTodoList] = useState([]);
     const [inProgressList, setInProgressList] = useState([]);
     const [doneList, setDoneList] = useState([]);
