@@ -188,7 +188,7 @@ export default function CreateProject() {
                                 <Form.Label>Skill</Form.Label>
                                 <Form.Control placeholder="React Native, Front end, Graphic design, ..." value={newPersonSkills} onChange={(event) => setNewPersonSkills(event.target.value)}/>
                                 <Form.Text className="text-muted">
-                                    Enter the skills separated with ', '
+                                    Enter the skills separated with ,
                                 </Form.Text>
                             </Form.Group>
                         </Form>
